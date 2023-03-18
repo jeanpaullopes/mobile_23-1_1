@@ -25,14 +25,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniritter.app1_2023_1.models.User;
+import br.com.uniritter.app1_2023_1.repositories.UserRepository;
+import br.com.uniritter.app1_2023_1.services.ServiceDone;
+import br.com.uniritter.app1_2023_1.services.UserService;
 
-public class Activity2 extends AppCompatActivity implements Response.Listener<JSONArray>, Response.ErrorListener {
+public class Activity2 extends AppCompatActivity  {
     private EditText edit;
     private List<User> users = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+
+
         Button btn2_1 = findViewById(R.id.button2_1);
         btn2_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +68,9 @@ public class Activity2 extends AppCompatActivity implements Response.Listener<JS
 
 
                     }
-                },this);
+                },error->{
+            Toast.makeText(this, "Ocorreu uma falha na requisição "+error.getMessage(), Toast.LENGTH_LONG).show();
+        });
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
         System.out.println("depois do add");
@@ -74,37 +81,14 @@ public class Activity2 extends AppCompatActivity implements Response.Listener<JS
         });
     }
     private void getAllUsers() {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
-                "https://jsonplaceholder.typicode.com/users", null,
-                this, this);
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
+        System.out.println("antes->"+UserRepository.getInstance().getUsers());
+
+        UserService.getAllUsers(this, ()->System.out.println("depois->"+ UserRepository.getInstance().getUsers()));
+
+        ;
+
     }
 
 
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(this, "Ocorreu uma falha na requisição "+error.getMessage(), Toast.LENGTH_LONG).show();
-    }
 
-    @Override
-    public void onResponse(JSONArray response) {
-
-        for (int i = 0; i < response.length(); i++) {
-            User user = null;
-            try {
-                JSONObject json = response.getJSONObject(i);
-
-                user = new User(
-                        json.getInt("id"),
-                        json.getString("name"),
-                        json.getString("username"),
-                        json.getString("email"));
-                users.add(user);
-            } catch (JSONException e) {
-                System.out.println("erro no Json. Fogo no parquinho "+e.getMessage());
-            }
-        }
-        System.out.println(users);
-    }
 }
