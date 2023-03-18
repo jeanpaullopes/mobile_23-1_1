@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import br.com.uniritter.app1_2023_1.models.Address;
 import br.com.uniritter.app1_2023_1.models.User;
 import br.com.uniritter.app1_2023_1.repositories.UserRepository;
 
@@ -30,6 +31,13 @@ public class UserService {
                     json.getString("name"),
                     json.getString("username"),
                     json.getString("email"));
+            if (json.has("address")) {
+                JSONObject jsonAdd = json.getJSONObject("address");
+                JSONObject jsonGeo = jsonAdd.getJSONObject("geo");
+
+                Address address = new Address("","","","",null);
+                user.setAddress(address);
+            }
 
         } catch (JSONException e) {
             System.out.println("erro no Json. Fogo no parquinho "+e.getMessage());

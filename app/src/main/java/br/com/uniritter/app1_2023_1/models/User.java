@@ -8,11 +8,21 @@ public class User {
     private String userName;
     private String email;
 
+    private Address address;
+
     public User(int id, String name, String userName, String email) {
         this.id = id;
         this.name = name;
         this.userName = userName;
         this.email = email;
+    }
+
+    public User(int id, String name, String userName, String email, Address address) {
+        this.id = id;
+        this.name = name;
+        this.userName = userName;
+        this.email = email;
+        this.address = address;
     }
 
     public int getId() {
@@ -41,6 +51,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @NonNull
