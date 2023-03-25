@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">App1_2023_1</string>
     <string name="btn_back">Voltar</string>
+    <string name="user">Usuário</string>
+    <string name="name">Nome</string>
+    <string name="email">E-Mail</string>
 </resources>

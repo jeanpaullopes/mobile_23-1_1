@@ -44,7 +44,8 @@ public class UserService {
         }
         return user;
     }
-
+    public static void getUser(Context contexto, int id, ServiceDone callback) {
+    }
     //buscar todos os users no servidor REST
     public static void getAllUsers(Context contexto, ServiceDone callback) {
 

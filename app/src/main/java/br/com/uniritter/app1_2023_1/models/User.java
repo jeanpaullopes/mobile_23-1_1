@@ -29,9 +29,13 @@ public class User {
         return id;
     }
 
+    public CharSequence getNameCS() {
+        return name;
+    }
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         this.name = name;

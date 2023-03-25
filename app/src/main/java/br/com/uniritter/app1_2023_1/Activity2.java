@@ -1,6 +1,8 @@
 package br.com.uniritter.app1_2023_1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.uniritter.app1_2023_1.adapters.UsersAdapter;
 import br.com.uniritter.app1_2023_1.models.User;
 import br.com.uniritter.app1_2023_1.repositories.UserRepository;
 import br.com.uniritter.app1_2023_1.services.ServiceDone;
@@ -32,11 +35,20 @@ import br.com.uniritter.app1_2023_1.services.UserService;
 public class Activity2 extends AppCompatActivity  {
     private EditText edit;
     private List<User> users = new ArrayList<>();
+    private RecyclerView rv;
+    LinearLayoutManager llm;
+    LinearLayoutManager llmh;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+        llm = new LinearLayoutManager(this);
+        llmh = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
+        rv = findViewById(R.id.usersRV);
 
         Button btn2_1 = findViewById(R.id.button2_1);
         btn2_1.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +56,13 @@ public class Activity2 extends AppCompatActivity  {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+            }
+        });
+        findViewById(R.id.button3).setOnClickListener((v) -> {
+            if (rv.getLayoutManager() == llm) {
+                rv.setLayoutManager(llmh);
+            } else {
+                rv.setLayoutManager(llm);
             }
         });
         edit = findViewById(R.id.edName);
@@ -83,7 +102,12 @@ public class Activity2 extends AppCompatActivity  {
     private void getAllUsers() {
         System.out.println("antes->"+UserRepository.getInstance().getUsers());
 
-        UserService.getAllUsers(this, ()->System.out.println("depois->"+ UserRepository.getInstance().getUsers()));
+        UserService.getAllUsers(this, ()->{
+
+            UsersAdapter adapter = new UsersAdapter(new ArrayList(UserRepository.getInstance().getUsers()));
+            rv.setLayoutManager(llmh);
+            rv.setAdapter(adapter);
+        });
 
         ;
 
