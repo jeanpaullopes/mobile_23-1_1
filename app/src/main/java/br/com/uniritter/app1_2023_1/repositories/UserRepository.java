@@ -59,4 +59,8 @@ public class UserRepository {
     public Collection<User> getUsers() {
         return this.usersMap.values();
     }
+
+    public User getUser(int id) {
+        return this.usersMap.get(id);
+    }
 }

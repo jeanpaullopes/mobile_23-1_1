@@ -1,4 +1,4 @@
-package br.com.uniritter.app1_2023_1;
+package br.com.uniritter.app1_2023_1.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import br.com.uniritter.app1_2023_1.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

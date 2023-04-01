@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:drawable/alert_dark_frame"
-    tools:context=".MainActivity">
+    tools:context=".views.MainActivity">
 
     <Button
         android:id="@+id/button"

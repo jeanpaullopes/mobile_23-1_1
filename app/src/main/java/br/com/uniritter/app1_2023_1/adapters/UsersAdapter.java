@@ -19,9 +19,10 @@ import br.com.uniritter.app1_2023_1.models.User;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
     private List<User> usersList;
-
+    private int tipoLayout;
     public UsersAdapter(List<User> usersList) {
         this.usersList = usersList;
+        //this.tipoLayout = tipo;
     }
 
     @NonNull
