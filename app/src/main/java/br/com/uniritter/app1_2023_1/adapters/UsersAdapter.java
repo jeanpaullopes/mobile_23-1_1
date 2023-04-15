@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SortedList;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -32,14 +33,19 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_holder_user, parent, false);
         view.findViewById(R.id.button4).setOnClickListener((v)->{
+            ((User)view.getTag()).getId();
             Toast.makeText(view.getContext(), ((User)view.getTag()).getName(), Toast.LENGTH_SHORT).show();
         });
         return new ViewHolder(view);
     }
+    public void onChange() {
+        this.notifyDataSetChanged();
 
+    }
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, int position) {
         User user = usersList.get(position);
+        //guarda o objeto User no atributo Tag do ViewHolder
         holder.view.setTag(user);
         ((TextView) holder.view.findViewById(R.id.vhUserName)).setText(user.getName());
         ((TextView) holder.view.findViewById(R.id.vhEmail)).setText(user.getEmail());

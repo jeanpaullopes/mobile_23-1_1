@@ -14,6 +14,7 @@ public class UserPresenter implements UserPresenterContract.Presenter{
 
     UserPresenterContract.View view;
     public UserPresenter(UserPresenterContract.View view) {
+
         this.view = view;
     }
 

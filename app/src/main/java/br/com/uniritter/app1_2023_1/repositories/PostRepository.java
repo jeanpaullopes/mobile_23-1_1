@@ -3,6 +3,7 @@ package br.com.uniritter.app1_2023_1.repositories;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import br.com.uniritter.app1_2023_1.models.Post;
 
@@ -54,9 +55,17 @@ public class PostRepository {
         return this.postsMap.containsKey(id);
     }
 
-    // retorna uma Collection com todos os usuários
+    // retorna uma Collection com todos os Post
     public Collection<Post> getPosts() {
         return this.postsMap.values();
+    }
+
+    // retorna uma Collection com todos os posts de 1 usuário
+    public Collection<Post> getPostsUser(int userId) {
+        return this.postsMap.values();
+    }
+    public Collection<Post> getPostsUserArray(int userId) {
+        return this.postsMap.values().stream().filter((p)->p.getUser().getId() == userId).collect(Collectors.toList());
     }
 
     public Post getPost(int id) {

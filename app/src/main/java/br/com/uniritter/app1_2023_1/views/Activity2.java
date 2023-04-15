@@ -35,7 +35,7 @@ public class Activity2 extends AppCompatActivity implements UserPresenterContrac
         setContentView(R.layout.activity_2);
 
         //presenter = new UserPresenter(this);
-        presenter = new UserPresenterLocal(this);
+        presenter = new UserPresenter(this);
         llm = new LinearLayoutManager(this);
         llmh = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
 
@@ -105,6 +105,7 @@ public class Activity2 extends AppCompatActivity implements UserPresenterContrac
 
     @Override
     public void setUsersAdapter(RecyclerView.Adapter adapter) {
+
         rv.setAdapter(adapter);
     }
 
